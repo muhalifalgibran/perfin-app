@@ -3,7 +3,7 @@ import 'package:perfin_app/core/firebase/firebase_auth_client.dart';
 abstract class AuthDataSource {
   Future<void> createAccount(String email, String password);
   Future<void> login(String email, String password);
-  bool isLoggedIn();
+  Future<bool> isLoggedIn();
 }
 
 // we should not catch the error here since we treat our repository
@@ -29,7 +29,7 @@ class AuthDataSourceImpl implements AuthDataSource {
   }
 
   @override
-  bool isLoggedIn() {
+  Future<bool> isLoggedIn() async {
     return _firebaseAuthClient.currentUser != null;
   }
 }
