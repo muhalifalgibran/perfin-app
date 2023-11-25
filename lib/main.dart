@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:perfin_app/core/di/service_locator.dart';
 import 'package:perfin_app/features/auth/presentation/pages/login_page.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: GoogleFonts.montserratTextTheme(),
       ),
+      builder: EasyLoading.init(),
       home: const LoginPage(),
     );
   }
