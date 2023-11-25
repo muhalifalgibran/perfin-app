@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "769104418021",
+    "project_id": "perfin-app-89fcc",
+    "storage_bucket": "perfin-app-89fcc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769104418021:android:1344e2717eb7905ad8f00c",
+        "android_client_info": {
+          "package_name": "com.example.perfin_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmOank1HGb0_yV3gtstPcqRKtyn5CilhI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
