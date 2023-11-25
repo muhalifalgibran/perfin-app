@@ -66,7 +66,7 @@ class LoginPage extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const RegistrationPage(),
+                        builder: (context) => RegistrationPage(),
                       ),
                     );
                   },
