@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:perfin_app/core/di/service_locator.dart';
 import 'package:perfin_app/core/error/failure.dart';
 import 'package:perfin_app/core/utils/repository_mixin.dart';
@@ -23,4 +24,8 @@ class AuthRepositoryImpl with RepositoryMixin implements AuthRepository {
       await callDataSource(
         () => _datasource.login(email, password),
       );
+
+  @override
+  Future<Either<Failure, User?>> getCurrentUser() async =>
+      await callDataSource(() => _datasource.getCurrentUser());
 }
