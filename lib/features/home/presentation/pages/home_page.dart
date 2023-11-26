@@ -79,7 +79,7 @@ class HomePage extends StatelessWidget {
                 userId: state.userData!.userId,
                 totalMoney: state.userData!.totalMoney,
                 isRising: false,
-                money: int.parse(_moneyCtrl.text),
+                money: num.parse(_moneyCtrl.text),
               );
               _totalMoney = state.userData!.totalMoney;
               EasyLoading.dismiss();

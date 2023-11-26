@@ -49,7 +49,7 @@ class ListMoneyHistory extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
-              Text('total money ${money.totalMoney.toString()}'),
+              Text('total money before ${money.totalMoney.toString()}'),
             ],
           )
         ],
