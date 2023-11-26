@@ -21,9 +21,11 @@ class ListMoneyHistory extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.symmetric(vertical: 14),
       decoration: BoxDecoration(
-        border: Border.all(),
+        border: Border.all(
+          color: Colors.transparent,
+        ),
         borderRadius: BorderRadius.circular(10),
-        color: isRising ? Colors.green.shade300 : Colors.red.shade300,
+        color: isRising ? Colors.green.shade100 : Colors.red.shade100,
       ),
       child: Row(
         children: [
@@ -47,7 +49,7 @@ class ListMoneyHistory extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
-              Text('total Money ${money.totalMoney.toString()}'),
+              Text('total money ${money.totalMoney.toString()}'),
             ],
           )
         ],

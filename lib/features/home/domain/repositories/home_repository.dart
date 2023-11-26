@@ -6,4 +6,5 @@ import 'package:perfin_app/features/home/domain/entities/user_x.dart';
 abstract class HomeRepository {
   Future<Either<Failure, UserX>> getCurrentUser(String userId);
   Future<Either<Failure, List<Money>?>> getUserMoney(String userId);
+  Future<Either<Failure, void>> signOut();
 }

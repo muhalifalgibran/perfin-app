@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:perfin_app/app.dart';
 import 'package:perfin_app/core/di/service_locator.dart';
 import 'package:perfin_app/features/home/domain/entities/money.dart';
 import 'package:perfin_app/features/home/presentation/cubits/home_cubit.dart';
@@ -14,7 +15,6 @@ class HomePage extends StatelessWidget {
   late Money _money;
   late num _totalMoney;
   final TextEditingController _moneyCtrl = TextEditingController(text: '0');
-  bool _isRising = false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +22,7 @@ class HomePage extends StatelessWidget {
       listener: (context, moneyState) {
         if (moneyState.isSuccess) {
           EasyLoading.dismiss();
+          Navigator.of(context).pop();
           getIt<HomeCubit>().getUserData();
         } else if (moneyState.isLoading) {
           EasyLoading.show(status: 'processing data..');
@@ -33,13 +34,22 @@ class HomePage extends StatelessWidget {
         }
       },
       child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            GestureDetector(
+                onTap: () {
+                  _showDialogSignOut(context);
+                },
+                child: Icon(Icons.logout)),
+            const SizedBox(width: 20)
+          ],
+        ),
         floatingActionButton: Wrap(
           direction: Axis.vertical,
           children: [
             FloatingActionButton(
               heroTag: 'fab1',
               onPressed: () {
-                // getIt<MoneyCubit>().changeMoney(_money, _totalMoney);
                 _showDialog(false, context);
               },
               backgroundColor: Colors.red.shade200,
@@ -49,7 +59,6 @@ class HomePage extends StatelessWidget {
             FloatingActionButton(
               heroTag: 'fab2',
               onPressed: () {
-                // getIt<MoneyCubit>().changeMoney(_money, _totalMoney);
                 _showDialog(true, context);
               },
               backgroundColor: Colors.green.shade200,
@@ -65,14 +74,22 @@ class HomePage extends StatelessWidget {
             if (state.isLoading) {
               EasyLoading.showInfo('retrieving data..');
             } else if (state.isSuccess) {
+              // initiate money
               _money = Money(
                 userId: state.userData!.userId,
                 totalMoney: state.userData!.totalMoney,
-                isRising: _isRising,
+                isRising: false,
                 money: int.parse(_moneyCtrl.text),
               );
               _totalMoney = state.userData!.totalMoney;
               EasyLoading.dismiss();
+            } else if (state.isSuccessSignout) {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const App(),
+                ),
+              );
             }
           },
           builder: (context, state) {
@@ -80,9 +97,9 @@ class HomePage extends StatelessWidget {
               builder: (context, state) {
                 if (state.isSuccess) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 40,
-                      horizontal: 20,
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,6 +150,49 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _showDialogSignOut(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            child: Container(
+              height: 100,
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('confirm sign out?'),
+                  const SizedBox(height: 14),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('dismiss')),
+                      const SizedBox(width: 32),
+                      GestureDetector(
+                        onTap: () {
+                          getIt<HomeCubit>().signOut();
+                        },
+                        child: const Text(
+                          'signout',
+                          style: TextStyle(
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
   }
 
   void _showDialog(bool isRising, BuildContext context) {

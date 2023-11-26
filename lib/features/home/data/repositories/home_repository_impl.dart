@@ -16,4 +16,8 @@ class HomeRepositoryImpl with RepositoryMixin implements HomeRepository {
   @override
   Future<Either<Failure, List<Money>?>> getUserMoney(String userId) =>
       callDataSource(() => _dataSource.getCurrentUserMoney(userId));
+
+  @override
+  Future<Either<Failure, void>> signOut() =>
+      callDataSource(() => _dataSource.logout());
 }

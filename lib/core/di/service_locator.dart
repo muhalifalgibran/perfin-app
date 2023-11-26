@@ -17,6 +17,7 @@ import 'package:perfin_app/features/home/domain/repositories/money_repository.da
 import 'package:perfin_app/features/home/domain/usecases/change_money.dart';
 import 'package:perfin_app/features/home/domain/usecases/get_user_firestore.dart';
 import 'package:perfin_app/features/home/domain/usecases/get_user_money.dart';
+import 'package:perfin_app/features/home/domain/usecases/sign_out.dart';
 import 'package:perfin_app/features/home/presentation/cubits/home_cubit.dart';
 import 'package:perfin_app/features/home/presentation/cubits/money_cubit.dart';
 
@@ -48,6 +49,7 @@ void setupLocator() {
   getIt.registerLazySingleton<GetUserFirestore>(() => GetUserFirestore());
   getIt.registerLazySingleton<GetUserMoney>(() => GetUserMoney());
   getIt.registerLazySingleton<ChangeMoney>(() => ChangeMoney());
+  getIt.registerLazySingleton<SignOut>(() => SignOut());
 
   // cubits
   // auth

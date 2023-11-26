@@ -7,12 +7,15 @@ import 'package:perfin_app/features/home/domain/entities/money.dart';
 import 'package:perfin_app/features/home/domain/entities/user_x.dart';
 import 'package:perfin_app/features/home/domain/usecases/get_user_firestore.dart';
 import 'package:perfin_app/features/home/domain/usecases/get_user_money.dart';
+import 'package:perfin_app/features/home/domain/usecases/sign_out.dart';
 
 enum HomeStatus {
   initial,
   loading,
   success,
   failure,
+  successSignout,
+  errorSignout,
 }
 
 class HomeState extends Equatable {
@@ -30,6 +33,8 @@ class HomeState extends Equatable {
 
   bool get isLoading => status == HomeStatus.loading;
   bool get isSuccess => status == HomeStatus.success;
+  bool get isSuccessSignout => status == HomeStatus.successSignout;
+  bool get isErrorSignout => status == HomeStatus.errorSignout;
   bool get isFailed => status == HomeStatus.failure;
   bool get isInitial => status == HomeStatus.initial;
 
@@ -88,6 +93,18 @@ class HomeCubit extends Cubit<HomeState> {
       ),
       (data) => emit(state.copyWith(
           userMoney: data?.reversed.toList(), status: HomeStatus.success)),
+    );
+  }
+
+  void signOut() async {
+    final result = await getIt<SignOut>().call();
+    result.fold(
+      (l) => emit(
+        state.copyWith(status: HomeStatus.errorSignout, failure: l),
+      ),
+      (data) => emit(
+        state.copyWith(status: HomeStatus.successSignout),
+      ),
     );
   }
 }
