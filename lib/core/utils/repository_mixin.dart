@@ -12,9 +12,9 @@ mixin RepositoryMixin {
     } on FirebaseException catch (e) {
       return Left(ClientFailure(message: e.toString()));
     } catch (e) {
-      return const Left(
+      return Left(
         DeviceFailure(
-          message: "Error occures. Try again later",
+          message: "Error occures. Try again later ${e.toString()}",
         ),
       );
     }

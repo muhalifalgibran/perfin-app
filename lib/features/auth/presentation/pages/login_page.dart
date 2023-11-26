@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
               EasyLoading.dismiss();
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => const HomePage(),
+                  builder: (context) => HomePage(),
                 ),
               );
             } else if (state.isFailed) {

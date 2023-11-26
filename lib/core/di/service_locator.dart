@@ -9,11 +9,16 @@ import 'package:perfin_app/features/auth/domain/usecases/login.dart';
 import 'package:perfin_app/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:perfin_app/features/auth/presentation/cubit/register_cubit.dart';
 import 'package:perfin_app/features/home/data/datasources/home_data_source.dart';
+import 'package:perfin_app/features/home/data/datasources/money_data_source.dart';
 import 'package:perfin_app/features/home/data/repositories/home_repository_impl.dart';
+import 'package:perfin_app/features/home/data/repositories/money_repository_impl.dart';
 import 'package:perfin_app/features/home/domain/repositories/home_repository.dart';
+import 'package:perfin_app/features/home/domain/repositories/money_repository.dart';
+import 'package:perfin_app/features/home/domain/usecases/change_money.dart';
 import 'package:perfin_app/features/home/domain/usecases/get_user_firestore.dart';
 import 'package:perfin_app/features/home/domain/usecases/get_user_money.dart';
 import 'package:perfin_app/features/home/presentation/cubits/home_cubit.dart';
+import 'package:perfin_app/features/home/presentation/cubits/money_cubit.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -25,10 +30,12 @@ void setupLocator() {
   // datasources
   getIt.registerLazySingleton<AuthDataSource>(() => AuthDataSourceImpl());
   getIt.registerLazySingleton<HomeDataSource>(() => HomeDataSourceImpl());
+  getIt.registerLazySingleton<MoneyDataSource>(() => MoneyDataSourceImpl());
 
   //repositories
   getIt.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl());
   getIt.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl());
+  getIt.registerLazySingleton<MoneyRepository>(() => MoneyRepositoryImpl());
 
   // usecases
   // auth
@@ -40,6 +47,7 @@ void setupLocator() {
   // home
   getIt.registerLazySingleton<GetUserFirestore>(() => GetUserFirestore());
   getIt.registerLazySingleton<GetUserMoney>(() => GetUserMoney());
+  getIt.registerLazySingleton<ChangeMoney>(() => ChangeMoney());
 
   // cubits
   // auth
@@ -48,4 +56,5 @@ void setupLocator() {
 
   // home
   getIt.registerLazySingleton<HomeCubit>(() => HomeCubit());
+  getIt.registerLazySingleton<MoneyCubit>(() => MoneyCubit());
 }

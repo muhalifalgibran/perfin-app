@@ -15,7 +15,10 @@ class FirebaseFirestoreClient {
     required Map<String, dynamic> data,
     required String documentId,
   }) async {
-    await _firebaseFirestore.collection(collection).doc(documentId).set(data);
+    await _firebaseFirestore
+        .collection(collection)
+        .doc(documentId)
+        .update(data);
   }
 
   Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> getListData(

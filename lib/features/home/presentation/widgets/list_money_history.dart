@@ -27,11 +27,12 @@ class ListMoneyHistory extends StatelessWidget {
       ),
       child: Row(
         children: [
-          isRising
+          !isRising
               ? const Icon(Icons.keyboard_double_arrow_down)
               : const Icon(Icons.keyboard_double_arrow_up),
           const SizedBox(width: 8),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [

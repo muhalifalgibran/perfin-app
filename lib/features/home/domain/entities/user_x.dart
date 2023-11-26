@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 class UserX extends Equatable {
   final String email;
   final String userId;
-  final int totalMoney;
+  final num totalMoney;
 
   const UserX({
     required this.email,

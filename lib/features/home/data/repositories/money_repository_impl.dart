@@ -8,7 +8,7 @@ import 'package:perfin_app/features/home/domain/repositories/money_repository.da
 
 class MoneyRepositoryImpl with RepositoryMixin implements MoneyRepository {
   @override
-  Future<Either<Failure, void>> changeMoney(Money money, int newTotal) {
+  Future<Either<Failure, void>> changeMoney(Money money, num newTotal) {
     return callDataSource(
       () => getIt<MoneyDataSource>().changeMoney(money, newTotal),
     );
