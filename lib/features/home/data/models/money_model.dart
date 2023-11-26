@@ -15,7 +15,7 @@ class MoneyModel extends Money {
         money: json['money'],
       );
 
-  Map<String, dynamic> toJson(Money money) {
+  static Map<String, dynamic> toJson(Money money) {
     return {
       'userId': money.userId,
       'totalMoney': money.totalMoney,
