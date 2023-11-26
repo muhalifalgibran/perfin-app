@@ -13,7 +13,7 @@ class UserXModel extends UserX {
         totalMoney: json['totalMoney'],
       );
 
-  Map<String, dynamic> toJson(UserX user) {
+  static Map<String, dynamic> toJson(UserX user) {
     return {
       'email': user.email,
       'userId': user.userId,

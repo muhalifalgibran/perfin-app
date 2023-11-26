@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:perfin_app/core/firebase/firebase_auth_client.dart';
+import 'package:perfin_app/core/firebase/firebase_firestore_client.dart';
+import 'package:perfin_app/features/home/data/models/user_x_model.dart';
+import 'package:perfin_app/features/home/domain/entities/user_x.dart';
 
 abstract class AuthDataSource {
   Future<void> createAccount(String email, String password);
@@ -13,13 +16,27 @@ abstract class AuthDataSource {
 // here if there is an error we just need to throw it and should be catched in repository
 class AuthDataSourceImpl implements AuthDataSource {
   final _firebaseAuthClient = FirebaseAuthClient();
+  final _firebaseFirestore = FirebaseFirestoreClient();
 
   @override
   Future<void> createAccount(String email, String password) async {
-    await _firebaseAuthClient.createUser(
+    await _firebaseAuthClient
+        .createUser(
       email: email,
       password: password,
-    );
+    )
+        .then((value) async {
+      // set the user uid to userId in firestore
+      final UserX userX = UserX(
+        email: email,
+        userId: value.user?.uid ?? '0',
+        totalMoney: 0,
+      );
+      await _firebaseFirestore.setData(
+        collection: 'users',
+        data: UserXModel.toJson(userX),
+      );
+    });
     await _firebaseAuthClient.signOut();
   }
 
