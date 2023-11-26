@@ -16,7 +16,6 @@ class HomeDataSourceImpl implements HomeDataSource {
   @override
   Future<UserX> getCurrentUser(String userId) async {
     final result = await _client.getListData('users', userId);
-
     return UserXModel.fromJson(result.first.data());
   }
 

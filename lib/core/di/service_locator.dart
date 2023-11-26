@@ -8,6 +8,12 @@ import 'package:perfin_app/features/auth/domain/usecases/is_logged_in.dart';
 import 'package:perfin_app/features/auth/domain/usecases/login.dart';
 import 'package:perfin_app/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:perfin_app/features/auth/presentation/cubit/register_cubit.dart';
+import 'package:perfin_app/features/home/data/datasources/home_data_source.dart';
+import 'package:perfin_app/features/home/data/repositories/home_repository_impl.dart';
+import 'package:perfin_app/features/home/domain/repositories/home_repository.dart';
+import 'package:perfin_app/features/home/domain/usecases/get_user_firestore.dart';
+import 'package:perfin_app/features/home/domain/usecases/get_user_money.dart';
+import 'package:perfin_app/features/home/presentation/cubits/home_cubit.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -18,9 +24,11 @@ GetIt getIt = GetIt.instance;
 void setupLocator() {
   // datasources
   getIt.registerLazySingleton<AuthDataSource>(() => AuthDataSourceImpl());
+  getIt.registerLazySingleton<HomeDataSource>(() => HomeDataSourceImpl());
 
   //repositories
   getIt.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl());
+  getIt.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl());
 
   // usecases
   // auth
@@ -29,8 +37,15 @@ void setupLocator() {
   getIt.registerLazySingleton<IsLoggedIn>(() => IsLoggedIn());
   getIt.registerLazySingleton<Login>(() => Login());
 
+  // home
+  getIt.registerLazySingleton<GetUserFirestore>(() => GetUserFirestore());
+  getIt.registerLazySingleton<GetUserMoney>(() => GetUserMoney());
+
   // cubits
   // auth
   getIt.registerLazySingleton<RegisterCubit>(() => RegisterCubit());
   getIt.registerLazySingleton<LoginCubit>(() => LoginCubit());
+
+  // home
+  getIt.registerLazySingleton<HomeCubit>(() => HomeCubit());
 }

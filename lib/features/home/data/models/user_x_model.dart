@@ -9,7 +9,7 @@ class UserXModel extends UserX {
 
   factory UserXModel.fromJson(Map<String, dynamic> json) => UserXModel(
         email: json['email'],
-        userId: json['id'],
+        userId: json['userId'],
         totalMoney: json['totalMoney'],
       );
 

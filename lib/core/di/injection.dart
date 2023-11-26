@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perfin_app/core/di/service_locator.dart';
 import 'package:perfin_app/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:perfin_app/features/auth/presentation/cubit/register_cubit.dart';
+import 'package:perfin_app/features/home/presentation/cubits/home_cubit.dart';
 
 class Injection {
   Injection._privateConstructor();
@@ -16,6 +17,9 @@ class Injection {
         ),
         BlocProvider<LoginCubit>(
           create: (context) => getIt<LoginCubit>(),
+        ),
+        BlocProvider<HomeCubit>(
+          create: (context) => getIt<HomeCubit>(),
         ),
       ];
 }

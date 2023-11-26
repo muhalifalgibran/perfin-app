@@ -22,6 +22,7 @@ class LoginPage extends StatelessWidget {
           bloc: _cubit,
           listener: (context, state) {
             if (state.isSuccess) {
+              EasyLoading.dismiss();
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
                   builder: (context) => const HomePage(),
@@ -83,7 +84,7 @@ class LoginPage extends StatelessWidget {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'please enter some text';
-                    } else if (value.length <= 6) {
+                    } else if (value.length < 6) {
                       return 'enter minimum 6 character';
                     }
                     return null;
