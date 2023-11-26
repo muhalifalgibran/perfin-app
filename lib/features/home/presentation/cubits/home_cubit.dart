@@ -87,7 +87,8 @@ class HomeCubit extends Cubit<HomeState> {
       (failure) => emit(
         state.copyWith(status: HomeStatus.failure, failure: failure),
       ),
-      (data) => emit(state.copyWith(userMoney: data)),
+      (data) =>
+          emit(state.copyWith(userMoney: data, status: HomeStatus.success)),
     );
   }
 }

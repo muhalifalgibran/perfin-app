@@ -4,6 +4,7 @@ import 'package:perfin_app/core/di/service_locator.dart';
 import 'package:perfin_app/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:perfin_app/features/auth/presentation/cubit/register_cubit.dart';
 import 'package:perfin_app/features/auth/presentation/pages/login_page.dart';
+import 'package:perfin_app/features/home/presentation/pages/home_page.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -14,7 +15,11 @@ class App extends StatelessWidget {
       bloc: getIt<LoginCubit>()..checkLoggedIn(),
       listener: (BuildContext context, state) {
         if (state.isLoggedIn) {
-          // TODO: Go to dashboard
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const HomePage(),
+            ),
+          );
         } else if (state.isNotLoggedIn) {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(

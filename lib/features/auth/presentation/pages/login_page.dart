@@ -4,6 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:perfin_app/core/di/service_locator.dart';
 import 'package:perfin_app/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:perfin_app/features/auth/presentation/pages/registration_page.dart';
+import 'package:perfin_app/features/home/presentation/pages/home_page.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -21,7 +22,11 @@ class LoginPage extends StatelessWidget {
           bloc: _cubit,
           listener: (context, state) {
             if (state.isSuccess) {
-              // TODO: Go TO dashboard
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const HomePage(),
+                ),
+              );
             } else if (state.isFailed) {
               EasyLoading.showError(
                 'invalid email or password',
