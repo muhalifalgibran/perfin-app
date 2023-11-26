@@ -11,6 +11,24 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Wrap(
+        direction: Axis.vertical,
+        children: [
+          FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: Colors.red.shade200,
+            child: const Icon(Icons.remove),
+          ),
+          SizedBox(height: 20),
+          FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: Colors.green.shade200,
+            child: const Icon(Icons.add),
+          ),
+          SizedBox(height: 20),
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       body: BlocConsumer<HomeCubit, HomeState>(
         bloc: getIt<HomeCubit>()..getUserData(),
         listener: (context, state) {
