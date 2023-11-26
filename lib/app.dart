@@ -18,7 +18,7 @@ class App extends StatelessWidget {
         } else if (state.isNotLoggedIn) {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => const LoginPage(),
+              builder: (context) => LoginPage(),
             ),
           );
         }

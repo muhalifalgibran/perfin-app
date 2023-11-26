@@ -25,6 +25,12 @@ class RegistrationPage extends StatelessWidget {
             } else if (state.isSuccess) {
               EasyLoading.dismiss();
               Navigator.pop(context);
+            } else if (state.isFailed) {
+              EasyLoading.dismiss();
+              EasyLoading.showError(
+                state.failure!.message!,
+                duration: const Duration(milliseconds: 1500),
+              );
             }
           },
           builder: (context, state) {
@@ -76,7 +82,7 @@ class RegistrationPage extends StatelessWidget {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'please enter some text';
-                      } else if (value.length <= 6) {
+                      } else if (value.length < 6) {
                         return 'enter minimum 6 character';
                       }
                       return null;
@@ -110,7 +116,7 @@ class RegistrationPage extends StatelessWidget {
   }
 
   bool isValidEmail(String email) {
-    // Simple email validation using a regular expression
+    // simple email validation using a regular expression
     final emailRegex =
         RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
     return emailRegex.hasMatch(email);
