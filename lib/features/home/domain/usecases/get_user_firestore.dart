@@ -4,7 +4,7 @@ import 'package:perfin_app/core/error/failure.dart';
 import 'package:perfin_app/features/home/domain/entities/user_x.dart';
 import 'package:perfin_app/features/home/domain/repositories/home_repository.dart';
 
-class GetCurrentUser {
+class GetUserFirestore {
   Future<Either<Failure, UserX>> call(String userId) =>
       getIt<HomeRepository>().getCurrentUser(userId);
 }
