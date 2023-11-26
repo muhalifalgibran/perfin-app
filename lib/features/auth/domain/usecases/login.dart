@@ -6,6 +6,6 @@ import 'package:perfin_app/features/auth/domain/repositories/auth_repository.dar
 class Login {
   final _repo = getIt<AuthRepository>();
 
-  Future<Either<Failure, void>> login(String email, String password) async =>
+  Future<Either<Failure, void>> call(String email, String password) async =>
       _repo.login(email, password);
 }

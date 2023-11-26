@@ -11,7 +11,7 @@ import 'package:perfin_app/features/auth/domain/repositories/auth_repository.dar
 class IsLoggedIn {
   final _repo = getIt<AuthRepository>();
 
-  Future<Either<Failure, bool>> isLoggedIn(NoParams params) async =>
+  Future<Either<Failure, bool>> call(NoParams params) async =>
       await _repo.isLoggedIn();
 }
 

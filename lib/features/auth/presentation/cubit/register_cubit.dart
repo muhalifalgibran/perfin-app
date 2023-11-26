@@ -46,6 +46,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
     final usecase = await getIt<CreateAccount>().call(email, password);
     // give delay since the execution is very fast for better ux
+    await Future.delayed(const Duration(milliseconds: 750));
     usecase.fold(
       (error) => emit(
         state.copyWith(status: RegisterStatus.failure, failure: error),

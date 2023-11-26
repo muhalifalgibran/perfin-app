@@ -20,6 +20,7 @@ class AuthDataSourceImpl implements AuthDataSource {
       email: email,
       password: password,
     );
+    await _firebaseAuthClient.signOut();
   }
 
   @override

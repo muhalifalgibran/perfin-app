@@ -6,6 +6,7 @@ import 'package:perfin_app/features/auth/domain/usecases/create_account.dart';
 import 'package:perfin_app/features/auth/domain/usecases/get_current_user.dart';
 import 'package:perfin_app/features/auth/domain/usecases/is_logged_in.dart';
 import 'package:perfin_app/features/auth/domain/usecases/login.dart';
+import 'package:perfin_app/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:perfin_app/features/auth/presentation/cubit/register_cubit.dart';
 
 GetIt getIt = GetIt.instance;
@@ -31,4 +32,5 @@ void setupLocator() {
   // cubits
   // auth
   getIt.registerLazySingleton<RegisterCubit>(() => RegisterCubit());
+  getIt.registerLazySingleton<LoginCubit>(() => LoginCubit());
 }
