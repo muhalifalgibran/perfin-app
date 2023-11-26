@@ -7,7 +7,7 @@ import '../../domain/entities/user_x.dart';
 
 abstract class HomeDataSource {
   Future<UserX> getCurrentUser(String userId);
-  Future<List<Money?>> getCurrentUserMoney(String userId);
+  Future<List<Money>?> getCurrentUserMoney(String userId);
 }
 
 class HomeDataSourceImpl implements HomeDataSource {
@@ -21,7 +21,7 @@ class HomeDataSourceImpl implements HomeDataSource {
   }
 
   @override
-  Future<List<Money?>> getCurrentUserMoney(String userId) async {
+  Future<List<Money>?> getCurrentUserMoney(String userId) async {
     final result = await _client.getListData('money', userId);
 
     return result.map((e) => MoneyModel.fromJson(e.data())).toList();
