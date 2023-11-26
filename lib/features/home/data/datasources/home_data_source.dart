@@ -1,8 +1,29 @@
-import 'package:dartz/dartz.dart';
-import 'package:perfin_app/core/error/failure.dart';
+import 'package:perfin_app/core/firebase/firebase_firestore_client.dart';
+import 'package:perfin_app/features/home/data/models/money_model.dart';
+import 'package:perfin_app/features/home/data/models/user_x_model.dart';
+import 'package:perfin_app/features/home/domain/entities/money.dart';
 
 import '../../domain/entities/user_x.dart';
 
 abstract class HomeDataSource {
-  Future<Either<Failure, UserX>> getCurrentUser(String userId);
+  Future<UserX> getCurrentUser(String userId);
+  Future<List<Money?>> getCurrentUserMoney(String userId);
+}
+
+class HomeDataSourceImpl implements HomeDataSource {
+  final _client = FirebaseFirestoreClient();
+
+  @override
+  Future<UserX> getCurrentUser(String userId) async {
+    final result = await _client.getListData('users', userId);
+
+    return UserXModel.fromJson(result.first.data());
+  }
+
+  @override
+  Future<List<Money?>> getCurrentUserMoney(String userId) async {
+    final result = await _client.getListData('money', userId);
+
+    return result.map((e) => MoneyModel.fromJson(e.data())).toList();
+  }
 }
